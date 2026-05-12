@@ -1,0 +1,15 @@
+---js
+const eleventyNavigation = {
+	key: "Achieved",
+	order: 2
+};
+---
+<h1>Achieved</h1>
+<p class="archive-intro">Posts you have marked complete (<code>achieved: true</code> in front matter).</p>
+
+{% set postslist = collections.postsAchieved %}
+{% if postslist.length %}
+{% include "postslist.njk" %}
+{% else %}
+<p>No achieved posts yet. Mark a post in <code>content/blog/</code> with <code>achieved: true</code>.</p>
+{% endif %}

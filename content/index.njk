@@ -1,0 +1,20 @@
+---js
+const eleventyNavigation = {
+	key: "Home",
+	order: 1
+};
+---
+{% set activePosts = collections.postsActive %}
+{% set achievedPosts = collections.postsAchieved %}
+{% set totalPosts = activePosts.length + achievedPosts.length %}
+{% set achievedCount = achievedPosts.length %}
+
+<h1>Posts</h1>
+<p class="home-progress"><strong>{{ achievedCount }}</strong> of <strong>{{ totalPosts }}</strong> achieved — completed posts are listed under <a href="/blog/">Achieved</a>.</p>
+
+{% if activePosts.length %}
+{% set postslist = activePosts %}
+{% include "postslist.njk" %}
+{% else %}
+<p>All posts are marked achieved. See <a href="/blog/">Achieved</a>.</p>
+{% endif %}
