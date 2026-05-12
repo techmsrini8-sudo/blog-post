@@ -130,3 +130,78 @@ a.post-tag:visited {
 	background: color-mix(in srgb, var(--color-accent) 30%, transparent);
 	color: var(--color-ink);
 }
+
+/* ── Manual theme overrides (data-theme attribute on <html>) ────────────── */
+/*
+ * These selectors come after the media queries so they win the cascade
+ * at equal specificity.  data-theme="dark" activates the dark palette
+ * regardless of the OS setting; data-theme="light" forces the light
+ * palette even when the OS prefers dark.
+ */
+
+[data-theme="dark"] {
+	--color-ink:             #d6e0ef;
+	--color-ink-muted:       #6b83a6;
+	--color-surface:         #0b1120;
+	--color-card:            #1e2d45;
+	--color-border:          #253351;
+	--color-accent:          #fbbf24;
+	--color-accent-hover:    #fcd34d;
+	--color-accent-visited:  #fde68a;
+
+	--shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="light"] {
+	--color-ink:             #1a2236;
+	--color-ink-muted:       #4a5c7a;
+	--color-surface:         #f4f6fb;
+	--color-card:            #ffffff;
+	--color-border:          #d0d9ea;
+	--color-accent:          #b45309;
+	--color-accent-hover:    #92400e;
+	--color-accent-visited:  #78350f;
+
+	--shadow: 0 1px 3px rgba(11, 17, 32, 0.08), 0 4px 20px rgba(11, 17, 32, 0.07);
+}
+
+[data-theme="dark"] :not(pre) > code {
+	background: color-mix(in srgb, var(--color-accent) 8%, var(--color-card));
+}
+
+[data-theme="light"] :not(pre) > code {
+	background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface));
+}
+
+/* ── Theme toggle button ────────────────────────────────────────────────── */
+.theme-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.25rem;
+	height: 2.25rem;
+	padding: 0;
+	background: transparent;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-sm, 8px);
+	color: var(--color-ink-muted);
+	cursor: pointer;
+	flex-shrink: 0;
+	transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.theme-toggle:hover {
+	color: var(--color-ink);
+	border-color: var(--color-accent);
+	background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+}
+
+.theme-toggle:focus-visible {
+	outline: 2px solid var(--color-accent);
+	outline-offset: 2px;
+}
+
+.theme-toggle svg {
+	display: block;
+	pointer-events: none;
+}

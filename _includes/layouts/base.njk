@@ -7,6 +7,9 @@
 		<meta name="description" content="{{ description or metadata.description }}">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
 
+		{#- Synchronously apply the stored theme before any paint to avoid FOUC. #}
+		<script eleventy:ignore>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
+
 		{#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
 		{#- <meta name="generator" content="{{ eleventy.generator }}"> #}
 
@@ -51,6 +54,9 @@
 					{%- endfor %}
 					</ul>
 				</nav>
+				<button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle theme">
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+				</button>
 			</div>
 		</header>
 
@@ -64,5 +70,6 @@
 			<p>Built with <a href="https://www.11ty.dev/">{{ eleventy.generator }}</a></p>
 		</footer>
 		<script type="module" src="{% getBundleFileUrl "js" %}"></script>
+		<script type="module" src="/js/theme-toggle.js"></script>
 	</body>
 </html>
