@@ -1,0 +1,132 @@
+/*
+ * Pixel & Prose — Brand theme
+ *
+ * Overrides the base design tokens from index.css with a cohesive
+ * dark-navy / warm-amber palette.  The same custom-property names are
+ * reused so every component picks up the new colours automatically.
+ *
+ * Palette reference
+ * -----------------
+ * Navy-950  #0b1120   (deepest background)
+ * Navy-900  #0f172a   (surface)
+ * Navy-800  #1e2d45   (card / elevated surface)
+ * Navy-700  #253351   (border, subtle dividers)
+ * Navy-400  #6b83a6   (muted text)
+ * Navy-100  #d6e0ef   (primary text on dark)
+ *
+ * Amber-400 #fbbf24   (accent)
+ * Amber-300 #fcd34d   (accent hover — lighter = more energetic)
+ * Amber-200 #fde68a   (visited links — desaturated)
+ */
+
+/* ── Light mode ─────────────────────────────────────────────────────────── */
+:root {
+	/* Colours */
+	--color-ink:             #1a2236;
+	--color-ink-muted:       #4a5c7a;
+	--color-surface:         #f4f6fb;
+	--color-card:            #ffffff;
+	--color-border:          #d0d9ea;
+	--color-accent:          #b45309;   /* amber-700 — readable on white */
+	--color-accent-hover:    #92400e;   /* amber-800 */
+	--color-accent-visited:  #78350f;   /* amber-900 */
+
+	/* Shadows */
+	--shadow: 0 1px 3px rgba(11, 17, 32, 0.08), 0 4px 20px rgba(11, 17, 32, 0.07);
+
+	/* Brand accent strip on the header */
+	--header-accent-bar:     #fbbf24;   /* amber-400 */
+
+	/* Typography extras */
+	--font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+/* ── Dark mode ──────────────────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-ink:             #d6e0ef;
+		--color-ink-muted:       #6b83a6;
+		--color-surface:         #0b1120;
+		--color-card:            #1e2d45;
+		--color-border:          #253351;
+		--color-accent:          #fbbf24;   /* amber-400 — pops on navy */
+		--color-accent-hover:    #fcd34d;   /* amber-300 */
+		--color-accent-visited:  #fde68a;   /* amber-200 */
+
+		--shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 8px 32px rgba(0, 0, 0, 0.45);
+	}
+}
+
+/* ── Brand header accent bar ────────────────────────────────────────────── */
+.site-header {
+	border-top: 3px solid var(--header-accent-bar, #fbbf24);
+}
+
+/* ── Home-link brand treatment ──────────────────────────────────────────── */
+.home-link {
+	font-size: 1.2rem;
+	letter-spacing: -0.03em;
+	background: linear-gradient(
+		135deg,
+		var(--color-ink) 0%,
+		var(--color-accent) 120%
+	);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.home-link:hover {
+	opacity: 0.85;
+	/* keep gradient; override index.css plain colour */
+	-webkit-text-fill-color: transparent;
+}
+
+/* ── Post tags — amber pill ─────────────────────────────────────────────── */
+.post-tag {
+	background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+	color: var(--color-accent);
+	padding: 0.15em 0.6em;
+	border-radius: 999px;
+	font-weight: 600;
+	font-size: 0.8125rem;
+	text-decoration: none;
+	border: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+	transition: background 0.15s ease, color 0.15s ease;
+}
+
+.post-tag:hover {
+	background: color-mix(in srgb, var(--color-accent) 22%, transparent);
+	color: var(--color-accent-hover);
+}
+
+/* Visited post-tag links should stay readable */
+a.post-tag:visited {
+	color: var(--color-accent-visited);
+}
+
+/* ── Prev/next navigation ───────────────────────────────────────────────── */
+.links-nextprev a {
+	color: var(--color-accent);
+}
+
+/* ── Inline code ────────────────────────────────────────────────────────── */
+:not(pre) > code {
+	background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface));
+	border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+	border-radius: 4px;
+	padding: 0.1em 0.35em;
+	color: var(--color-accent);
+}
+
+@media (prefers-color-scheme: dark) {
+	:not(pre) > code {
+		background: color-mix(in srgb, var(--color-accent) 8%, var(--color-card));
+	}
+}
+
+/* ── Selection highlight ────────────────────────────────────────────────── */
+::selection {
+	background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+	color: var(--color-ink);
+}
